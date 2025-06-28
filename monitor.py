@@ -31,11 +31,8 @@ def check_stock():
         try:
             res = requests.get(url, headers=HEADERS, timeout=8)
             html = res.text
-            if "Out of Stock" in html or "Sold Out" in html:
-                print(f"❌ {name} 缺货中")
-            elif "Add to Cart" in html or "In Stock" in html:
-                print(f"✅ {name} 有货！准备推送通知")
-                send_wechat_push(f"{name} BK Rush 有货", url)
+            print(f"✅ {name} 有货！（测试用）准备推送通知")
+send_wechat_push(f"{name} BK Rush【测试推送】", url)
             else:
                 print(f"❓ {name} 库存状态未知")
         except Exception as e:
