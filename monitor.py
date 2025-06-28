@@ -3,7 +3,6 @@ import requests
 from bs4 import BeautifulSoup
 import os
 
-# 只监控 Seyberts 和 Predator 官网
 PRODUCTS = [
     ("Seyberts", "https://seyberts.com/products/predator-bk-rush-sport-wrap-break-cue"),
     ("Predator官网", "https://www.predatorcues.com/pool-cues/predator-bk-rush-break-cue-no-wrap.html")
@@ -30,9 +29,19 @@ def check_stock():
     for name, url in PRODUCTS:
         print(f"🔍 正在检查 {name}...")
         try:
-            # 模拟测试有货推送（无论是否真的有货）
-            print(f"✅ {name} 有货！（测试用）准备推送通知")
+            # 原逻辑：请求网页并判断是否有货
+            # res = requests.get(url, headers=HEADERS, timeout=8)
+            # html = res.text
+            # if "Add to Cart" in html or "In Stock" in html:
+            #     print(f"✅ {name} 有货！准备推送通知")
+            #     send_wechat_push(f"{name} BK Rush 有货", url)
+            # else:
+            #     print(f"❌ {name} 缺货中")
+
+            # ⬇️ 测试用：不访问网页，直接模拟“有货”情况
+            print(f"✅ {name} 有货！（测试模拟）")
             send_wechat_push(f"{name} BK Rush【测试推送】", url)
+
         except Exception as e:
             print(f"🚫 检查 {name} 出错：{e}")
 
